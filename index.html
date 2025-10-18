@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>aCartoon</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      overflow-x: hidden;
+      background: #000;
+      color: #fff;
+    }
+
+    video {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .logo .a {
+      color: #22c55e;
+    }
+
+    .search-area {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .search {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 50px;
+      padding: 6px 12px;
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .search input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #000;
+      font-size: 15px;
+      width: 0;
+      transition: width 0.4s ease;
+    }
+
+    .search:focus-within input {
+      width: 180px;
+    }
+
+    .search i {
+      font-size: 20px;
+      cursor: pointer;
+      color: #000;
+      transition: color 0.3s ease, transform 0.2s;
+    }
+
+    .search i:hover {
+      color: #22c55e;
+      transform: scale(1.1);
+    }
+
+    .icons {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .icon {
+      font-size: 22px;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .icon:hover {
+      transform: scale(1.2);
+      color: #22c55e;
+    }
+
+    /* --- Asosiy matn --- */
+    .content {
+      position: absolute;
+      top: 50%;
+      left: 7%;
+      transform: translateY(-50%);
+      z-index: 2;
+    }
+
+    .content h1 {
+      font-size: 70px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .content .details {
+      font-size: 20px;
+      color: #fff;
+      opacity: 0.9;
+      margin-bottom: 25px;
+    }
+
+    .btns {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .watch-btn {
+      background: #22c55e;
+      color: #fff;
+      border: none;
+      padding: 10px 22px;
+      font-size: 17px;
+      border-radius: 30px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: 0.3s;
+    }
+
+    .watch-btn:hover {
+      background: #16a34a;
+      transform: scale(1.05);
+    }
+
+    .sound-btn {
+      font-size: 35px;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .sound-btn:hover {
+      color: #22c55e;
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Orqa fon video -->
+  <video id="bgVideo" loop muted autoplay>
+    <source src="video/vd.mp4" type="video/mp4">
+  </video>
+
+  <!-- Header -->
+  <header>
+    <div class="logo"><span class="a">a</span>Cartoon</div>
+
+    <div class="search-area">
+      <form class="search" onsubmit="return false;">
+        <input type="text" placeholder="Search...">
+        <button type="submit" style="background:none;border:none;cursor:pointer;">
+          <i class="ri-search-line"></i>
+        </button>
+      </form>
+      <div class="icons">
+        <i class="ri-notification-3-line icon"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- Garfield matni -->
+  <div class="content">
+    <h1>Garfield</h1>
+    <div class="details">2024 • Cartoon • 8+</div>
+    <div class="btns">
+      <button class="watch-btn">
+        <i class="ri-play-fill"></i> Watch
+      </button>
+      <i id="soundToggle" class="ri-volume-mute-line sound-btn"></i>
+    </div>
+  </div>
+
+  <script>
+    const video = document.getElementById("bgVideo");
+    const soundToggle = document.getElementById("soundToggle");
+    let soundOn = false;
+
+    soundToggle.addEventListener("click", () => {
+      soundOn = !soundOn;
+      video.muted = !soundOn;
+      if (soundOn) {
+        video.play();
+        soundToggle.className = "ri-volume-up-line sound-btn";
+      } else {
+        soundToggle.className = "ri-volume-mute-line sound-btn";
+      }
+    });
+  </script>
+
+</body>
+</html>
